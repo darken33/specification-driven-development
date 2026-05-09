@@ -7,6 +7,18 @@
 
 ---
 
+## Clarifications
+
+### Session 2026-05-09
+
+- Q: Empty client list state (no clients in system) → A: Display empty state message "Aucun client enregistré. Cliquez sur 'Nouveau client' pour commencer." with visual illustration/icon and clickable link to create first client
+- Q: Initial mock dataset composition → A: 10 varied clients with diverse geographic coverage (postal codes: 75 Paris, 13 Marseille, 33 Bordeaux, 06 Nice, 31 Toulouse, etc.), varied family situations (CÉLIBATAIRE, MARIÉ, DIVORCÉ, VEUF, PACSÉ), and mixed children counts (0-3 per client) to support comprehensive feature testing
+- Q: Loading states & visual feedback during async operations → A: Display loading spinner during page transitions, form submissions, and deletions with disabled buttons during operation to prevent duplicate submissions and provide clear UX feedback
+- Q: Form input types & component behaviors → A: Name fields (Nom/Prénom): text input, maxlength 50; Address fields (Ligne1/Ligne2): text input, maxlength 50; Postal code: number input (5 digits only, enforced by input type); City: text input, maxlength 50
+- Q: Card color assignment strategy → A: Use hash-based deterministic assignment from client ID (hash(clientID) mod colorPaletteLength). Same client always displays with same color across sessions and pages. Color palette: 8 colors (blue, red, green, orange, purple, teal, pink, yellow)
+
+---
+
 ## User Scenarios & Testing
 
 ### User Story 1 - View Client List (Priority: P1)
@@ -24,6 +36,7 @@ End users need to see all registered clients in a modern card-based layout on th
 3. **Given** a client card is visible, **When** user reads the card, **Then** they can identify the client by initials badge (2 letters from first/last name)
 4. **Given** multiple clients exist, **When** cards are displayed, **Then** each card has a colored header band (color varies per card for visual distinction)
 5. **Given** a client card exists, **When** user sees it, **Then** "Voir le détail →" link is present and clickable
+6. **Given** no clients exist in the system, **When** home page loads, **Then** empty state displays: message "Aucun client enregistré. Cliquez sur 'Nouveau client' pour commencer." + illustration/icon + clickable "+ Nouveau client" link
 
 ---
 
@@ -57,9 +70,11 @@ Users need to register new clients by filling a form with all required informati
 
 1. **Given** user is on home page, **When** user clicks "+ Nouveau client" button, **Then** new client form page displays with empty form fields
 2. **Given** new client form is displayed, **When** user sees required fields, **Then** form contains: Nom, Prénom, Ligne1 adresse, Ligne2 adresse (optional), Code Postal, Ville, Situation Familiale, Nombre d'enfants
-3. **Given** user fills all required fields correctly, **When** user submits form, **Then** client is created in mock data and user is redirected to detail page
-4. **Given** user fills form with invalid postal code, **When** user attempts to submit, **Then** validation error displays: "Code postal doit être 5 chiffres"
-5. **Given** user fills form with missing required field, **When** user attempts to submit, **Then** validation error highlights missing field and displays "Ce champ est obligatoire"
+3. **Given** user fills all required fields correctly, **When** user submits form, **Then** loading spinner displays and "Créer" button is disabled
+4. **Given** form is being submitted, **When** mock API processes creation, **Then** spinner remains visible until response received
+5. **Given** creation completes successfully, **When** response returns, **Then** loading spinner disappears and user is redirected to detail page
+6. **Given** user fills form with invalid postal code, **When** user attempts to submit, **Then** validation error displays: "Code postal doit être 5 chiffres" (no API call made, no loading state)
+7. **Given** user fills form with missing required field, **When** user attempts to submit, **Then** validation error highlights missing field and displays "Ce champ est obligatoire" (no API call made, no loading state)
 
 ---
 
@@ -75,8 +90,10 @@ Users need to update client first and last name to correct errors or reflect nam
 
 1. **Given** user is on client detail page, **When** user clicks "Modifier le nom", **Then** a modal dialog displays with current Nom and Prénom fields pre-filled
 2. **Given** name modal is open, **When** user modifies the name fields, **Then** changes display in real-time in modal form
-3. **Given** user enters new name values, **When** user clicks confirm button, **Then** name is updated in mock data and modal closes
-4. **Given** modal is closed after save, **When** user views detail page, **Then** new name is displayed in client detail
+3. **Given** user enters new name values, **When** user clicks confirm button, **Then** loading spinner displays inside modal and "Confirmer" button is disabled
+4. **Given** name update is in progress, **When** mock API processes the request, **Then** spinner remains visible until response received
+5. **Given** update completes successfully, **When** response returns, **Then** spinner disappears, modal closes, and detail page refreshes with new name
+6. **Given** modal is closed after save, **When** user views detail page, **Then** new name is displayed in client detail
 
 ---
 
@@ -92,8 +109,10 @@ Users need to update client address to reflect relocations or correct address er
 
 1. **Given** user is on client detail page, **When** user clicks "Modifier l'adresse", **Then** a modal dialog displays with current address fields (ligne1, ligne2, code postal, ville) pre-filled
 2. **Given** address modal is open, **When** user modifies address fields, **Then** modal form updates and allows free editing
-3. **Given** user enters valid address, **When** user clicks confirm button, **Then** address is updated in mock data and modal closes
-4. **Given** modal is closed after save, **When** user views detail page, **Then** new address is displayed in ADDRESS section
+3. **Given** user enters valid address, **When** user clicks confirm button, **Then** loading spinner displays inside modal and "Confirmer" button is disabled
+4. **Given** address update is in progress, **When** mock API processes the request, **Then** spinner remains visible until response received
+5. **Given** update completes successfully, **When** response returns, **Then** spinner disappears, modal closes, and detail page refreshes with new address
+6. **Given** modal is closed after save, **When** user views detail page, **Then** new address is displayed in ADDRESS section
 
 ---
 
@@ -109,8 +128,10 @@ Users need to update client family status and number of children to maintain acc
 
 1. **Given** user is on client detail page, **When** user clicks "Modifier la situation", **Then** a modal dialog displays with current Situation Familiale and Nombre d'enfants pre-populated
 2. **Given** situation modal is open, **When** user selects different family status, **Then** dropdown shows: CÉLIBATAIRE, MARIÉ(E), DIVORCÉ(E), VEUF(VE), PACSÉ(E)
-3. **Given** user updates family situation, **When** user clicks confirm, **Then** situation is updated in mock data and modal closes
-4. **Given** modal is closed after save, **When** user views detail page, **Then** new family situation badge and children count are displayed
+3. **Given** user updates family situation, **When** user clicks confirm, **Then** loading spinner displays inside modal and "Confirmer" button is disabled
+4. **Given** situation update is in progress, **When** mock API processes the request, **Then** spinner remains visible until response received
+5. **Given** update completes successfully, **When** response returns, **Then** spinner disappears, modal closes, and detail page refreshes with new situation
+6. **Given** modal is closed after save, **When** user views detail page, **Then** new family situation badge and children count are displayed
 
 ---
 
@@ -126,8 +147,10 @@ Users need to remove clients from the system with confirmation to prevent accide
 
 1. **Given** user is on client detail page, **When** user clicks delete button, **Then** a confirmation modal appears asking "Êtes-vous sûr de vouloir supprimer ce client ?"
 2. **Given** deletion confirmation modal is open, **When** user reviews the warning message, **Then** message clearly indicates deletion is permanent
-3. **Given** confirmation modal is displayed, **When** user clicks "Supprimer" button, **Then** client is deleted from mock data and user is redirected to home page
-4. **Given** client has been deleted, **When** user views home page, **Then** deleted client no longer appears in client list
+3. **Given** confirmation modal is displayed, **When** user clicks "Supprimer" button, **Then** loading spinner displays inside modal and "Supprimer" button is disabled
+4. **Given** deletion is in progress, **When** mock API processes the delete request, **Then** spinner remains visible until response received
+5. **Given** deletion completes successfully, **When** response returns, **Then** spinner disappears, modal closes, and user is redirected to home page
+6. **Given** client has been deleted, **When** user views home page, **Then** deleted client no longer appears in client list
 
 ---
 
@@ -210,8 +233,9 @@ Users need to remove clients from the system with confirmation to prevent accide
   - Mock service simulates Connaissance Client API responses
   - Implements all operations: GET list, GET detail, POST create, PUT update name/address/situation, DELETE
   - Mock data stored in memory (session scoped)
-  - Provides realistic sample client data (5-10 clients with varied information)
-- **Acceptance**: All CRUD operations work through mock service without API dependency
+  - Initial dataset: 10 sample clients with diverse attributes (varied postal codes: 75, 13, 33, 06, 31, 69, 59, 34, 84, 67; varied family situations: CÉLIBATAIRE, MARIÉ, DIVORCÉ, VEUF, PACSÉ; children counts: 0-3)
+  - Realistic French names and address data for authentic testing experience
+- **Acceptance**: All CRUD operations work through mock service without API dependency; initial dataset provides representative test scenarios
 
 ### R9: Navigation & Routing (Technical)
 - **Requirement**: Application MUST support SPA routing between home page and detail page without full page reload
@@ -223,13 +247,16 @@ Users need to remove clients from the system with confirmation to prevent accide
 - **Acceptance**: Navigation between pages works smoothly with correct routing
 
 ### R10: Error Handling & Validation (Technical)
-- **Requirement**: Application MUST provide user-friendly validation messages and error handling
+- **Requirement**: Application MUST provide user-friendly validation messages and error handling, with clear loading state feedback during async operations
 - **Details**:
-  - Form validation displays on blur or submit
+  - Form validation displays on blur or submit (validation is synchronous, no loading state)
   - Error messages specific (not generic "Error occurred")
   - Failed operations display user-friendly messages
+  - Loading spinner displays during all async operations (API calls): page transitions, form submission, modifications, deletions
+  - Buttons are disabled while operations are in progress to prevent duplicate submissions
+  - Spinner disappears when response received (success or error)
   - No console errors visible to users
-- **Acceptance**: All validation and errors display appropriately with helpful messages
+- **Acceptance**: All validation and errors display appropriately with helpful messages; loading states provide clear feedback during async operations; buttons disabled during operations prevent duplicate submissions
 
 ---
 
@@ -282,7 +309,14 @@ Users need to remove clients from the system with confirmation to prevent accide
   - Title: "Liste des clients"
   - Action button: "+ Nouveau client" (top-right, blue)
   - Grid layout: 4 cards per row (responsive, fewer on mobile)
-  - Each card: Initials badge + Name + Address (postal code – city) + "Voir le détail →" link
+  - Each card: 
+    - Colored header band (color determined by hash-based assignment from client ID for deterministic visual consistency across sessions)
+    - Initials badge (2 letters from first/last name)
+    - Full name display
+    - Address (postal code – city)
+    - "Voir le détail →" link
+  - Empty state (when no clients): Message "Aucun client enregistré. Cliquez sur 'Nouveau client' pour commencer." with illustration/icon and clickable "+ Nouveau client" link
+- **Color Palette for Headers**: 8 colors (blue, red, green, orange, purple, teal, pink, yellow) assigned deterministically via hash(clientID) mod 8
 
 ### Page 2: Client Detail Page (`/clients/:id`)
 - **Header**: "Accueil Client" branding
@@ -298,23 +332,31 @@ Users need to remove clients from the system with confirmation to prevent accide
 ### Page 3: New Client Form (`/clients/new`)
 - **Header**: "Accueil Client" branding
 - **Form Fields**:
-  - Nom (text input, required)
-  - Prénom (text input, required)
-  - Ligne1 (text input, required)
-  - Ligne2 (text input, optional)
-  - Code Postal (text input, required, 5 digits)
-  - Ville (text input, required)
-  - Situation Familiale (select dropdown, required)
-  - Nombre d'enfants (number input, required, 0-20)
+  - Nom (text input, required, maxlength 50)
+  - Prénom (text input, required, maxlength 50)
+  - Ligne1 (text input, required, maxlength 50)
+  - Ligne2 (text input, optional, maxlength 50)
+  - Code Postal (number input, required, 5 digits max, enforced by input type)
+  - Ville (text input, required, maxlength 50)
+  - Situation Familiale (select dropdown, required, options: CÉLIBATAIRE, MARIÉ(E), DIVORCÉ(E), VEUF(VE), PACSÉ(E))
+  - Nombre d'enfants (number input, required, min 0, max 20)
 - **Buttons**: Submit "Créer" + Cancel "Annuler"
+- **Validation**: Fields validate on blur (display errors inline); form submit triggers validation before API call
+- **Loading**: Submit button displays loading spinner and is disabled during form submission
 
 ### Page 4-7: Modal Dialogs
-| Modal | Title | Fields | Buttons |
-|-------|-------|--------|---------|
-| Modify Name | Modifier le nom | Nom, Prénom (pre-filled) | Confirmer, Annuler |
-| Modify Address | Modifier l'adresse | Ligne1, Ligne2, Code Postal, Ville (pre-filled) | Confirmer, Annuler |
-| Modify Situation | Modifier la situation | Situation Familiale, Nombre d'enfants (pre-filled) | Confirmer, Annuler |
-| Delete Confirmation | Supprimer le client | Message: "Êtes-vous sûr...?" | Supprimer, Annuler |
+| Modal | Title | Fields | Input Types | Buttons |
+|-------|-------|--------|-------------|---------|
+| Modify Name | Modifier le nom | Nom, Prénom (pre-filled) | text input, maxlength 50 each | Confirmer, Annuler |
+| Modify Address | Modifier l'adresse | Ligne1, Ligne2, Code Postal, Ville (pre-filled) | text (maxlength 50), text (maxlength 50), number (5 digits), text (maxlength 50) | Confirmer, Annuler |
+| Modify Situation | Modifier la situation | Situation Familiale, Nombre d'enfants (pre-filled) | select dropdown, number input (0-20) | Confirmer, Annuler |
+| Delete Confirmation | Supprimer le client | Message: "Êtes-vous sûr...?" | N/A (text only) | Supprimer, Annuler |
+
+**Modal Behaviors**:
+- All modal input fields pre-filled with current values
+- Input types enforce HTML5 constraints (maxlength, number range)
+- Confirmer button displays loading spinner and is disabled during API call
+- Modal closes on successful confirmation; errors display inline
 
 ---
 
@@ -322,12 +364,13 @@ Users need to remove clients from the system with confirmation to prevent accide
 
 1. **Mock Data**: Backend API not available for MVP; application uses in-memory mock service
 2. **Authentication**: Out of scope per constitution (no JWT validation required)
-3. **No Pagination**: MVP supports small dataset (~5-10 clients); pagination added in future phase
+3. **No Pagination**: MVP supports small dataset (~10 clients); pagination added in future phase
 4. **Session Scope**: Client changes persist within browser session only (no backend persistence)
-5. **Color Assignment**: Card header colors assigned sequentially to new clients for visual distinction
+5. **Deterministic Card Colors**: Card header colors assigned via hash-based algorithm from client ID; same client always displays with same color across sessions and page reloads
 6. **Postal Code Format**: Assumed to be 5-digit format (French postal code convention)
 7. **Family Status**: Assumed enum: CÉLIBATAIRE, MARIÉ(E), DIVORCÉ(E), VEUF(VE), PACSÉ(E) as per API schema
 8. **Responsive Design**: Application designed for modern browsers; mobile optimization in future phase
+9. **Loading States**: Simulated API delays (100ms GET list, 50ms GET detail, 100ms POST create, 50ms PUT operations, 50ms DELETE) provide realistic UX for loading spinner display
 
 ---
 
