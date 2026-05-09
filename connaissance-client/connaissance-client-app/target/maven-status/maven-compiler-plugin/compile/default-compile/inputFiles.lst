@@ -1,0 +1,7 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/config/AdapterConfiguration.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/ConnaissanceClientApplication.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/config/SecurityConfig.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/config/DatabaseConfiguration.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/health/ApiIgnHealthIndicator.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/config/CustomErrorHandler.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/src/main/java/com/sqli/workshop/ddd/connaissance/client/config/OpenApiConfig.java

@@ -1,0 +1,68 @@
+2026-05-09 05:24:40.295 [main] INFO  c.s.w.d.c.c.ConnaissanceClientApplication [userId=anonymous] [correlationId=] [clientId=] [operation=] - Starting ConnaissanceClientApplication using Java 21.0.2 with PID 3820347 (/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/target/connaissance-client-app-2.2.0-SNAPSHOT.jar started by pbousquet in /home/pbousquet/Devoxx2026/connaissance-client)
+2026-05-09 05:24:40.300 [main] DEBUG c.s.w.d.c.c.ConnaissanceClientApplication [userId=anonymous] [correlationId=] [clientId=] [operation=] - Running with Spring Boot v4.0.1, Spring v7.0.2
+2026-05-09 05:24:40.302 [main] INFO  c.s.w.d.c.c.ConnaissanceClientApplication [userId=anonymous] [correlationId=] [clientId=] [operation=] - No active profile set, falling back to 1 default profile: "default"
+2026-05-09 05:24:41.819 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [userId=anonymous] [correlationId=] [clientId=] [operation=] - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2026-05-09 05:24:42.015 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [userId=anonymous] [correlationId=] [clientId=] [operation=] - Finished Spring Data repository scanning in 187 ms. Found 1 MongoDB repository interface.
+2026-05-09 05:24:42.158 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.159 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.160 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.162 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.163 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.182 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.183 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.184 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.184 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.201 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.201 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.202 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.202 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.214 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.214 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.215 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.215 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.225 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.226 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.226 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.227 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.240 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.240 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.241 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.241 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:42.252 [main] DEBUG i.g.r.s.u.AspectJOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Aspects are not activated because AspectJ is not on the classpath.
+2026-05-09 05:24:42.253 [main] DEBUG i.g.r.s.u.RxJava2OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-05-09 05:24:42.253 [main] DEBUG i.g.r.s.u.RxJava3OnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - RxJava3 related Aspect extensions are not activated, because RxJava3 is not on the classpath.
+2026-05-09 05:24:42.253 [main] DEBUG i.g.r.s.u.ReactorOnClasspathCondition [userId=anonymous] [correlationId=] [clientId=] [operation=] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-05-09 05:24:43.696 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor [userId=anonymous] [correlationId=] [clientId=] [operation=] - No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-05-09 05:24:43.709 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor [userId=anonymous] [correlationId=] [clientId=] [operation=] - No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-05-09 05:24:44.940 [main] INFO  o.s.boot.tomcat.TomcatWebServer [userId=anonymous] [correlationId=] [clientId=] [operation=] - Tomcat initialized with port 8080 (http)
+2026-05-09 05:24:44.969 [main] INFO  o.a.catalina.core.StandardService [userId=anonymous] [correlationId=] [clientId=] [operation=] - Starting service [Tomcat]
+2026-05-09 05:24:44.970 [main] INFO  o.a.catalina.core.StandardEngine [userId=anonymous] [correlationId=] [clientId=] [operation=] - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-05-09 05:24:45.029 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [userId=anonymous] [correlationId=] [clientId=] [operation=] - Root WebApplicationContext: initialization completed in 4572 ms
+2026-05-09 05:24:45.489 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext [userId=anonymous] [correlationId=] [clientId=] [operation=] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'connaissanceClientDelegate' defined in URL [jar:nested:/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/target/connaissance-client-app-2.2.0-SNAPSHOT.jar/!BOOT-INF/lib/connaissance-client-api-2.2.0-SNAPSHOT.jar!/com/sqli/workshop/ddd/connaissance/client/api/ConnaissanceClientDelegate.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'getService' defined in com.sqli.workshop.ddd.connaissance.client.ConnaissanceClientApplication: Unsatisfied dependency expressed through method 'getService' parameter 0: No qualifying bean of type 'com.sqli.workshop.ddd.connaissance.client.domain.ports.ClientRepository' available: expected single matching bean but found 2: clientRepositoryImpl,mongoClientRepository
+2026-05-09 05:24:45.496 [main] INFO  o.a.catalina.core.StandardService [userId=anonymous] [correlationId=] [clientId=] [operation=] - Stopping service [Tomcat]
+2026-05-09 05:24:45.535 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [userId=anonymous] [correlationId=] [clientId=] [operation=] - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-09 05:24:45.576 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter [userId=anonymous] [correlationId=] [clientId=] [operation=] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of method getService in com.sqli.workshop.ddd.connaissance.client.ConnaissanceClientApplication required a single bean, but 2 were found:
+	- clientRepositoryImpl: defined in URL [jar:nested:/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-app/target/connaissance-client-app-2.2.0-SNAPSHOT.jar/!BOOT-INF/lib/connaissance-client-db-adapter-2.2.0-SNAPSHOT.jar!/com/sqli/workshop/ddd/connaissance/client/db/ClientRepositoryImpl.class]
+	- mongoClientRepository: defined by method 'mongoClientRepository' in class path resource [com/sqli/workshop/ddd/connaissance/client/config/AdapterConfiguration.class]
+
+This may be due to missing parameter name information
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+Ensure that your compiler is configured to use the '-parameters' flag.
+You may need to update both your build tool settings as well as your IDE.
+(See https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-6.1-Release-Notes#parameter-name-retention)
+
+

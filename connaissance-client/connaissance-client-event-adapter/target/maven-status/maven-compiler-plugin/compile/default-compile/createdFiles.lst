@@ -1,0 +1,8 @@
+com/sqli/workshop/ddd/connaissance/client/generated/event/producer/IDefaultServiceEventsProducer$AdresseMessagePayloadHeaders.class
+com/sqli/workshop/ddd/connaissance/client/generated/event/model/AdresseMessagePayload.class
+com/sqli/workshop/ddd/connaissance/client/event/adapter/InMemoryAdresseEventServiceImpl$EventRecord.class
+com/sqli/workshop/ddd/connaissance/client/generated/event/model/Adresse.class
+com/sqli/workshop/ddd/connaissance/client/generated/event/producer/IDefaultServiceEventsProducer.class
+com/sqli/workshop/ddd/connaissance/client/event/adapter/InMemoryAdresseEventServiceImpl.class
+com/sqli/workshop/ddd/connaissance/client/generated/event/producer/DefaultServiceEventsProducer.class
+com/sqli/workshop/ddd/connaissance/client/event/AdresseEventServiceImpl.class

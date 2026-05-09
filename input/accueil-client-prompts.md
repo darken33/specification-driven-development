@@ -15,7 +15,7 @@ S'agissant d'un POC, n'ayant pas pour but de partir en production, on ne traiter
 
 Définis uniquement le fichier constitution.md, puis me le retourner afin que je puisse vérifier le respect de ces principes.​
 
-## Spécifications Alternative
+## Spécifications
 
 /speckit.specify Nous disposons actuellement d'une application backend exposant des API REST définies dans le contrat OpenAPI (fichier `connaissance-client-api.yaml`). En tant qu'architecte technique et fonctionnel possédant de solides compétences en UX/UI, Tu dois spécifier une application frontend qui accède à tous les points de terminaison du contrat OpenAPI. ​
 
@@ -46,20 +46,7 @@ Une première version MVP consiste à disposer de la page d'accueil, le backend 
 
 ## Implémentation
 
-/speckit.implement Implémente la phase 1, puis rend moi la main afin que je puisse valider, l'idéal serait de pouvoir lancer l'application pour voir le rendu initial.​
-
 /speckit.implement Lance l'implémentation par phase à partir de la liste des tasks, en suivant le plan et les spec.​
 
 /speckit.implement Parfait cela fonctionne, par contre le design n'est pas excellent, peux-tu me proposer un bandeau design pour le titre, et plus de couleur sur les cartes clients ?.​
 
-## Spécification du reste des écrans
-
-/speckit.specify Nous devons ajouter de nouveaux écrans (nous avons déjà la liste des clients, et le détail d'un client) affin de compléter l'application nous devons à minima créer les pages :
-
-* Création d'une fiche client
-* Modification du client (adresse, situation familiale, nom et prénom)
-* Suppression d'un client
-
-Pour rappel la spécification OpenApi du backend est décrit dans le fichier connaissance-client-api.yaml.
-
-Une fois la tâche réalisée, rends moi la main afin que je valide ce que tu auras rédigé.​

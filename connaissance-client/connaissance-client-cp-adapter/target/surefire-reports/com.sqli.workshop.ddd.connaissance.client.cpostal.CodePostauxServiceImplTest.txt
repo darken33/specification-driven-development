@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.sqli.workshop.ddd.connaissance.client.cpostal.CodePostauxServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.228 s -- in com.sqli.workshop.ddd.connaissance.client.cpostal.CodePostauxServiceImplTest

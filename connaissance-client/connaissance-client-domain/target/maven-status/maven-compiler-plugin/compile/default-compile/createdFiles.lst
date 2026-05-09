@@ -1,0 +1,16 @@
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/Ville.class
+com/sqli/workshop/ddd/connaissance/client/domain/ports/AdresseEventService.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/Destinataire.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/Nom.class
+com/sqli/workshop/ddd/connaissance/client/domain/exceptions/ClientInconnuException.class
+com/sqli/workshop/ddd/connaissance/client/domain/ConnaissanceClientService.class
+com/sqli/workshop/ddd/connaissance/client/domain/enums/SituationFamiliale.class
+com/sqli/workshop/ddd/connaissance/client/domain/ports/CodePostauxService.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/CodePostal.class
+com/sqli/workshop/ddd/connaissance/client/domain/ConnaissanceClientServiceImpl.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/Adresse.class
+com/sqli/workshop/ddd/connaissance/client/domain/ports/ClientRepository.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/Prenom.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/Client.class
+com/sqli/workshop/ddd/connaissance/client/domain/models/types/LigneAdresse.class
+com/sqli/workshop/ddd/connaissance/client/domain/exceptions/AdresseInvalideException.class
