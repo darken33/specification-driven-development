@@ -1,0 +1,15 @@
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && ng test --watch=false
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && pwd && npm -v && node -v
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && echo READY
+ bash .specify/scripts/bash/check-prerequisites.sh --json --paths-only
+ bash .specify/scripts/bash/setup-plan.sh --json
+ pwd
+ bash .specify/scripts/bash/setup-tasks.sh --json
+ SPECIFY_FEATURE_DIRECTORY=specs/002-client-detail-modals bash /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test -- --run
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test -- --run --include src/app/features/client-management/containers/client-create-page/**/*.spec.ts
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test -- --run --include src/app/features/client-management/**/*.spec.ts
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test -- --run --include src/app/features/client-management/**/*.spec.ts
+ cd /home/pbousquet/Workspace/SQLI/talks/specification-driven-development/accueil-client/frontend && npm test -- --run --include src/app/features/client-management/**/*.spec.ts

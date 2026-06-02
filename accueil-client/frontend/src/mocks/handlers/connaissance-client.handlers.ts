@@ -6,23 +6,25 @@ const scenarioKey = 'client-list-scenario';
 const mockClients: ConnaissanceClient[] = [
   {
     id: '8a9204f5-aa42-47bc-9f04-17caab5de111',
-    nom: 'Dupont',
-    prenom: 'Jean',
-    ligne1: '10 rue de la Paix',
-    codePostal: '75002',
-    ville: 'Paris',
+    nom: 'Bousquet',
+    prenom: 'Philippe',
+    ligne1: '48 rue bauducheu',
+    ligne2: '',
+    codePostal: '33800',
+    ville: 'Bordeaux',
     situationFamiliale: 'CELIBATAIRE',
     nombreEnfants: 0
   },
   {
     id: '8a9204f5-aa42-47bc-9f04-17caab5de222',
-    nom: 'Martin',
-    prenom: 'Camille',
-    ligne1: '22 avenue Victor Hugo',
-    codePostal: '33000',
-    ville: 'Bordeaux',
+    nom: 'Bousquet',
+    prenom: 'Anne',
+    ligne1: '12 avenue de l Ocean',
+    ligne2: 'Batiment B',
+    codePostal: '33600',
+    ville: 'Pessac',
     situationFamiliale: 'MARIE',
-    nombreEnfants: 2
+    nombreEnfants: 1
   }
 ];
 

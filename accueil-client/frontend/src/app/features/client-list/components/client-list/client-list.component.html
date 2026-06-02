@@ -2,7 +2,12 @@
   <header class="board-header">
     <h2>Liste des clients</h2>
 
-    <button class="new-client-btn" type="button" aria-label="Creer un nouveau client">
+    <button
+      class="new-client-btn"
+      type="button"
+      aria-label="Creer un nouveau client"
+      (click)="onCreateClient()"
+    >
       <span aria-hidden="true">+</span>
       Nouveau client
     </button>

@@ -11,6 +11,7 @@ import { ClientListItemVM } from '../../models/connaissance-client.model';
 export class ClientListComponent {
   @Input({ required: true }) items: ClientListItemVM[] = [];
   @Output() selectClient = new EventEmitter<string>();
+  @Output() createClient = new EventEmitter<void>();
 
   private readonly palette = ['#1f6fbe', '#2f8f46', '#e86a0b', '#7a2ea8', '#0f96a5'];
 
@@ -20,6 +21,10 @@ export class ClientListComponent {
 
   onSelect(id: string): void {
     this.selectClient.emit(id);
+  }
+
+  onCreateClient(): void {
+    this.createClient.emit();
   }
 
   colorAt(index: number): string {

@@ -30,4 +30,8 @@ export class ClientListPageComponent implements OnInit {
   onSelectClient(clientId: string): void {
     this.router.navigate(['/clients', clientId]);
   }
+
+  onCreateClient(): void {
+    this.router.navigate(['/clients/new']);
+  }
 }

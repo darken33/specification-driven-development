@@ -9,7 +9,11 @@
   <section class="page-content">
     @if (state$ | async; as state) {
       @if (state.status === 'success') {
-        <app-client-list [items]="state.items" (selectClient)="onSelectClient($event)"></app-client-list>
+        <app-client-list
+          [items]="state.items"
+          (selectClient)="onSelectClient($event)"
+          (createClient)="onCreateClient()"
+        ></app-client-list>
       } @else {
         <app-client-list-state
           [status]="state.status"
