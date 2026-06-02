@@ -1,0 +1,22 @@
+<header class="topbar" aria-label="Entete Accueil Client">
+  <div class="brand">
+    <span class="brand-icon" aria-hidden="true">oo</span>
+    <span>Accueil Client</span>
+  </div>
+</header>
+
+<main class="client-list-page">
+  <section class="page-content">
+    @if (state$ | async; as state) {
+      @if (state.status === 'success') {
+        <app-client-list [items]="state.items" (selectClient)="onSelectClient($event)"></app-client-list>
+      } @else {
+        <app-client-list-state
+          [status]="state.status"
+          [errorMessage]="state.errorMessage || ''"
+          (retry)="onRetry()"
+        ></app-client-list-state>
+      }
+    }
+  </section>
+</main>

@@ -1,0 +1,19 @@
+<section class="state-panel" [attr.data-status]="status" aria-live="polite" aria-label="Etat de la liste clients">
+  <ng-container [ngSwitch]="status">
+    <div *ngSwitchCase="'loading'" class="state loading">
+      <p>Chargement de la liste clients...</p>
+    </div>
+
+    <div *ngSwitchCase="'empty'" class="state empty">
+      <h2>Aucun client trouve</h2>
+      <p>Commencez par creer une nouvelle fiche client.</p>
+      <button type="button" aria-label="Creer un nouveau client">Nouveau client</button>
+    </div>
+
+    <div *ngSwitchCase="'error'" class="state error" role="alert">
+      <h2>Erreur de chargement</h2>
+      <p>{{ errorMessage }}</p>
+      <button type="button" aria-label="Relancer le chargement des clients" (click)="onRetry()">Reessayer</button>
+    </div>
+  </ng-container>
+</section>

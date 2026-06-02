@@ -1,0 +1,36 @@
+.state-panel {
+  border-radius: 12px;
+}
+
+.state {
+  background: #ffffff;
+  border: 1px solid #dbe5ef;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.loading {
+  background: #f8fbff;
+}
+
+.empty {
+  background: #f8fcf8;
+}
+
+.error {
+  background: #fff8f8;
+  border-color: #f0c5c5;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+button {
+  background: #0d5f8f;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.55rem 0.85rem;
+}
