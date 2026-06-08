@@ -17,20 +17,18 @@ Définis uniquement le fichier constitution.md, puis me le retourner afin que je
 
 ## Spécifications
 
-/speckit.specify Nous disposons actuellement d'une application backend exposant des API REST définies dans le contrat OpenAPI (fichier `connaissance-client-api.yaml`). En tant qu'architecte technique et fonctionnel possédant de solides compétences en UX/UI, Tu dois spécifier une application frontend qui accède à tous les points de terminaison du contrat OpenAPI. ​
+/speckit.specify Nous disposons actuellement d'une application backend exposant des API REST définies dans le contrat OpenAPI (fichier `connaissance-client-api.yaml`). En tant qu'architecte technique et fonctionnel possédant de solides compétences en UX/UI, Tu dois spécifier une application frontend de gestion de clients qui accède à tous les points de terminaison du contrat OpenAPI. ​
 
-Nous disposons des maquettes suivantes :
+Nous disposons des maquettes suivantes :​
+* Page d'accueil / liste des clients `maquette_accueil-client.png`. ​
+* Page nouveau client `maquette_nouveau-client.png`. ​
+* Page détail client `maquette_detail-client.png`.​
+* Pop Up modification d'adresse `maquette_modifier-adresse.png`.​
+* Pop Up modification situation `maquette_modifier-situation.png`.​
+* Pop Up supprimer client `maquette_supprimer-client.png`.​
 
-* Page d'accueil / liste des clients `maquette_accueil-client.png`. 
-* Page nouveau client `maquette_nouveau-client.png`. 
-* Page détail client `maquette_detail-client.png`.
-* Pop Up modification d'adresse `maquette_modifier-adresse.png`.
-* Pop Up modification situation `maquette_modifier-situation.png`.
-* Pop Up supprimer client `maquette_supprimer-client.png`.
-
-Une première version MVP consiste à disposer de la page d'accueil, le backend API n'étant pas disponible il faudra disposer d'un mock pour les tests.  ​
-
-​Une fois la tâche réalisée, rends moi la main afin que je valide ce que tu auras rédigé.​
+Nous allons développer une première version MVP consistant à disposer de la page d'accueil, le backend API n'étant pas disponible il faudra disposer d'un mock pour les tests.  ​
+Une fois la spécification réalisée, rends moi la main afin que je valide ce que tu auras rédigé. ​
 
 ## Clarification​
 
