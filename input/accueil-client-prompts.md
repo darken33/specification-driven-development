@@ -5,6 +5,7 @@
 /speckit.constitution En tant qu'architecte technique spécialisé en Angular et TypeScript, définis la structure, les principes architecturaux et de développement d'une application front-end moderne. Pour ce faire, suis les meilleures pratiques actuelles, en respectant au minimum les principes suivants :​
 
 * Utiliser les dernières versions d'Angular et de TypeScript.​
+* Utiliser en priorité les outils d'industrialisation et génération ng et npm​
 * Principe KISS : Privilégier la simplicité.​
 * Séparer explicitement l'interface utilisateur du traitement.​
 
