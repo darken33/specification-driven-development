@@ -1,0 +1,16 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/Prenom.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/Ville.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/exceptions/AdresseInvalideException.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/ConnaissanceClientService.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/enums/SituationFamiliale.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/ConnaissanceClientServiceImpl.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/ports/CodePostauxService.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/Adresse.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/Nom.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/ports/AdresseEventService.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/ports/ClientRepository.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/CodePostal.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/Client.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/exceptions/ClientInconnuException.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/Destinataire.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-domain/src/main/java/com/sqli/workshop/ddd/connaissance/client/domain/models/types/LigneAdresse.java

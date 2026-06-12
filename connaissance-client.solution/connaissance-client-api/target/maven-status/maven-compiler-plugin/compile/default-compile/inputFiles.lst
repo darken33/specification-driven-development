@@ -1,0 +1,11 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientDto.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/src/main/java/com/sqli/workshop/ddd/connaissance/client/api/ConnaissanceClientDelegate.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationFamilialeDto.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationDto.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientInDto.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiController.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ApiUtil.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/AdresseDto.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApi.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiDelegate.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-api/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ApiErrorResponseDto.java

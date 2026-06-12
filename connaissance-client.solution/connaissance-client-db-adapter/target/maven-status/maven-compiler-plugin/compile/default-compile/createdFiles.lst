@@ -1,0 +1,6 @@
+com/sqli/workshop/ddd/connaissance/client/db/ClientRepositoryImpl.class
+com/sqli/workshop/ddd/connaissance/client/db/adapter/InMemoryClientRepositoryAdapter.class
+com/sqli/workshop/ddd/connaissance/client/db/ClientDbMapperImpl.class
+com/sqli/workshop/ddd/connaissance/client/db/ClientDb.class
+com/sqli/workshop/ddd/connaissance/client/db/ClientDbMapper.class
+com/sqli/workshop/ddd/connaissance/client/db/ClientDbRepository.class

@@ -1,0 +1,3 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-db-adapter/src/test/java/com/sqli/workshop/ddd/connaissance/client/db/ClientDbMapperTest.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-db-adapter/src/test/java/com/sqli/workshop/ddd/connaissance/client/db/adapter/InMemoryClientRepositoryAdapterTest.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-db-adapter/src/test/java/com/sqli/workshop/ddd/connaissance/client/db/ClientRepositoryImplTest.java

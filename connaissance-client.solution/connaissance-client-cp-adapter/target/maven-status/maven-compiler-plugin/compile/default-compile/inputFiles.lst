@@ -1,0 +1,15 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/ApiClient.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/JavaTimeFormatter.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/BaseApi.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/src/main/java/com/sqli/workshop/ddd/connaissance/client/cpostal/CodePostauxServiceImpl.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/model/Commune.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/client/CodesPostauxApi.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/auth/HttpBasicAuth.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/RFC3339DateFormat.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/ServerVariable.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/RFC3339JavaTimeModule.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/auth/ApiKeyAuth.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/RFC3339InstantDeserializer.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/ServerConfiguration.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/auth/Authentication.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-cp-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/codepostal/auth/HttpBearerAuth.java

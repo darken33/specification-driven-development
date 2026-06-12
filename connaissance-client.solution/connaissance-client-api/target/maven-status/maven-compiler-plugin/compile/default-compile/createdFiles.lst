@@ -1,0 +1,13 @@
+com/sqli/workshop/ddd/connaissance/client/api/ConnaissanceClientDelegate.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiController$1.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ApiUtil.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/ApiErrorResponseDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiDelegate.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientInDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApi$1.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiController.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/AdresseDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationFamilialeDto.class
+com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApi.class

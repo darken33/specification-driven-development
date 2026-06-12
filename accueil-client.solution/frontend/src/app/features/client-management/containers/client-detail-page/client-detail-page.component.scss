@@ -1,0 +1,84 @@
+.client-detail-page {
+  margin: 2rem auto;
+  max-width: 920px;
+  padding: 1.25rem;
+}
+
+.back-link {
+  background: transparent;
+  border: 0;
+  color: #0b5bc6;
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.state-box {
+  background: #ffffff;
+  border: 1px solid #d7dbe7;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.state-box.error {
+  border-color: #e57a7a;
+}
+
+.retry {
+  background: #0b5bc6;
+  border: 1px solid #0b5bc6;
+  border-radius: 999px;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+}
+
+.detail-card {
+  background: #ffffff;
+  border: 1px solid #d7dbe7;
+  border-radius: 0.9rem;
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+}
+
+p {
+  margin: 0.2rem 0;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ghost,
+.danger {
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #0b5bc6;
+  color: #0b5bc6;
+}
+
+.danger {
+  background: transparent;
+  border: 1px solid #b00020;
+  color: #b00020;
+}

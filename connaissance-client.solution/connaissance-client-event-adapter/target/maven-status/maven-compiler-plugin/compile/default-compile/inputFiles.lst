@@ -1,0 +1,6 @@
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/src/main/java/com/sqli/workshop/ddd/connaissance/client/event/adapter/InMemoryAdresseEventServiceImpl.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/event/model/Adresse.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/event/producer/IDefaultServiceEventsProducer.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/event/producer/DefaultServiceEventsProducer.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/src/main/java/com/sqli/workshop/ddd/connaissance/client/event/AdresseEventServiceImpl.java
+/home/pbousquet/Devoxx2026/connaissance-client/connaissance-client-event-adapter/target/generated-sources/src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/event/model/AdresseMessagePayload.java

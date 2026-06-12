@@ -1,0 +1,9 @@
+com/sqli/workshop/ddd/connaissance/client/ConnaissanceClientApplication$1.class
+com/sqli/workshop/ddd/connaissance/client/ConnaissanceClientApplication.class
+com/sqli/workshop/ddd/connaissance/client/config/SecurityConfig.class
+com/sqli/workshop/ddd/connaissance/client/config/CustomErrorHandler.class
+com/sqli/workshop/ddd/connaissance/client/health/ApiIgnHealthIndicator$1.class
+com/sqli/workshop/ddd/connaissance/client/config/AdapterConfiguration.class
+com/sqli/workshop/ddd/connaissance/client/config/OpenApiConfig.class
+com/sqli/workshop/ddd/connaissance/client/health/ApiIgnHealthIndicator.class
+com/sqli/workshop/ddd/connaissance/client/config/DatabaseConfiguration.class

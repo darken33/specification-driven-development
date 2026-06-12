@@ -1,0 +1,10 @@
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/AdresseDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ApiErrorResponseDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/ConnaissanceClientInDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/model/SituationFamilialeDto.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ApiUtil.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApi.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiController.java
+src/main/java/com/sqli/workshop/ddd/connaissance/client/generated/api/server/ConnaissanceClientApiDelegate.java

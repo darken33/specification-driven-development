@@ -1,0 +1,44 @@
+.topbar {
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid #cfd4da;
+  display: flex;
+  height: 52px;
+  padding: 0 14px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.brand {
+  align-items: center;
+  color: #20242a;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+}
+
+.brand-icon {
+  color: #1f2329;
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: -0.12em;
+  transform: translateY(-1px);
+}
+
+.client-list-page {
+  background: #ececf1;
+  min-height: calc(100vh - 52px);
+  padding: 1.6rem 1rem 2rem;
+}
+
+.page-content {
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+@media (max-width: 720px) {
+  .client-list-page {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+}

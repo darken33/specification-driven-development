@@ -1,0 +1,44 @@
+.modal-backdrop {
+  align-items: center;
+  background: rgba(20, 29, 48, 0.45);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+}
+
+.modal-panel {
+  background: #ffffff;
+  border-radius: 1rem;
+  max-width: 520px;
+  padding: 1rem;
+  width: 92%;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+.secondary,
+.danger {
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid #0b5bc6;
+  color: #0b5bc6;
+}
+
+.danger {
+  background: #b00020;
+  border: 1px solid #b00020;
+  color: #ffffff;
+}
