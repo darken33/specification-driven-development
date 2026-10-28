@@ -1,0 +1,76 @@
+<main class="page-shell">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Espace conseiller</p>
+      <h1>Liste des clients</h1>
+    </div>
+    <a class="action-button" routerLink="/clients/new">Nouveau client</a>
+  </header>
+
+  @if (state(); as currentState) {
+    @switch (currentState.status) {
+      @case ('loading') {
+        <p class="list-message" role="status" aria-live="polite" aria-busy="true">
+          Chargement des clients…
+        </p>
+      }
+      @case ('empty') {
+        <p class="list-message" role="status" aria-live="polite">Aucun client disponible.</p>
+      }
+      @case ('error') {
+        <section class="list-message list-message--error">
+          <p role="alert">Impossible de charger la liste des clients.</p>
+          <button
+            class="action-button"
+            type="button"
+            aria-label="Réessayer le chargement"
+            (click)="retry()"
+          >
+            Réessayer
+          </button>
+        </section>
+      }
+      @case ('success') {
+        <section class="client-grid" aria-label="Clients">
+          @for (client of currentState.clients; track client.id) {
+            <article class="client-card">
+              <div class="client-card__heading">
+                <div>
+                  <p class="client-card__label">Nom</p>
+                  <h2>{{ client.nom || 'Non renseigné' }}</h2>
+                </div>
+                <span class="client-card__avatar" aria-hidden="true">
+                  {{ (client.prenom || '?').charAt(0) }}{{ (client.nom || '?').charAt(0) }}
+                </span>
+              </div>
+
+              <p class="client-card__first-name">
+                <span class="client-card__label">Prénom</span>
+                {{ client.prenom || 'Non renseigné' }}
+              </p>
+              <p class="client-card__location">
+                <span class="client-card__label">Localisation</span>
+                <span
+                  >{{ client.codePostal || 'Non renseigné' }}
+                  {{ client.ville || 'Non renseigné' }}</span
+                >
+              </p>
+              <a
+                class="detail-button"
+                [routerLink]="['/clients', client.id]"
+                [attr.aria-label]="
+                  'Voir le détail de ' +
+                  (client.prenom || 'Non renseigné') +
+                  ' ' +
+                  (client.nom || 'Non renseigné')
+                "
+              >
+                Voir le détail
+              </a>
+            </article>
+          }
+        </section>
+      }
+    }
+  }
+</main>

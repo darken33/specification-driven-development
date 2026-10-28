@@ -1,0 +1,40 @@
+flowchart LR
+  USER["Consommateur REST"]
+  MCPUSER["Client MCP"]
+
+  subgraph CC["Service Connaissance Client"]
+    APP["connaissance-client-app<br/>assemblage et configuration"]
+    API["connaissance-client-api<br/>OpenAPI et delegate"]
+    DOMAIN["connaissance-client-domain<br/>cas d'usage et ports"]
+    DB["connaissance-client-db-adapter"]
+    CP["connaissance-client-cp-adapter"]
+    EVT["connaissance-client-event-adapter"]
+
+    API -->|appel REST délégué| DOMAIN
+    DOMAIN -->|port ClientRepository| DB
+    DOMAIN -->|port CodePostauxService| CP
+    DOMAIN -->|port AdresseEventService| EVT
+
+    APP -.->|assemble| API
+    APP -.->|configure| DOMAIN
+    APP -.->|assemble| DB
+    APP -.->|assemble| CP
+    APP -.->|assemble| EVT
+  end
+
+  MCP["connaissance-client-mcp<br/>Python / FastMCP"]
+  MONGO[(MongoDB)]
+  POSTAL["API distante communes / codes postaux"]
+  TOPIC[("Kafka<br/>event.adresse.v1")]
+
+  USER -->|HTTP| API
+  MCPUSER -->|MCP HTTP| MCP
+  MCP -->|HTTP REST localhost:8080| API
+  DB -->|lecture / écriture| MONGO
+  CP -->|validation HTTP| POSTAL
+  EVT -.->|publication asynchrone| TOPIC
+
+  LEGEND["Légende : plein = appel synchrone observé; pointillé = publication Kafka; tiret-point = assemblage/configuration. MCP est un client auxiliaire du backend."]
+
+  classDef external fill:#f4f4f4,stroke:#555,stroke-dasharray:4 4
+  class MONGO,POSTAL,TOPIC,USER,MCPUSER,MCP external

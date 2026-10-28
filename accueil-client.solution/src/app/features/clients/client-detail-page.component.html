@@ -1,0 +1,289 @@
+<main class="detail-page">
+  <header class="detail-header">
+    <div>
+      <p class="eyebrow">Espace clients</p>
+      <h1>Fiche client</h1>
+    </div>
+    <a class="back-link" data-action="back" routerLink="/">Retour à la liste</a>
+  </header>
+
+  @if (state() === 'loading') {
+    <p class="state-message" role="status">Chargement de la fiche client…</p>
+  } @else if (state() === 'error') {
+    <section class="state-message state-message--error" role="alert">
+      <p>Impossible de charger cette fiche client.</p>
+      <button class="button button--primary" data-action="retry" type="button" (click)="retry()">
+        Réessayer
+      </button>
+    </section>
+  } @else if (state() === 'not-found') {
+    <section class="state-message" role="status">
+      <h2>Client introuvable</h2>
+      <p>Cette fiche n’existe pas ou n’est plus disponible.</p>
+      <a class="button button--primary" data-action="back" routerLink="/">Retour à la liste</a>
+    </section>
+  } @else if (client(); as currentClient) {
+    <section class="client-panel" aria-labelledby="client-name">
+      <div class="client-heading">
+        <div>
+          <p class="eyebrow">Identité</p>
+          <h2 id="client-name">{{ currentClient.prenom }} {{ currentClient.nom }}</h2>
+        </div>
+        <span class="client-id">{{ currentClient.id }}</span>
+      </div>
+
+      <div class="detail-grid">
+        <section class="detail-section" aria-labelledby="address-heading">
+          <h3 id="address-heading">Adresse</h3>
+          <dl>
+            <div><dt>Adresse</dt><dd>{{ currentClient.ligne1 }}</dd></div>
+            @if (currentClient.ligne2) {
+              <div><dt>Complément</dt><dd>{{ currentClient.ligne2 }}</dd></div>
+            }
+            <div><dt>Code postal</dt><dd>{{ currentClient.codePostal }}</dd></div>
+            <div><dt>Ville</dt><dd>{{ currentClient.ville }}</dd></div>
+          </dl>
+        </section>
+
+        <section class="detail-section" aria-labelledby="family-heading">
+          <h3 id="family-heading">Situation familiale</h3>
+          <dl>
+            <div><dt>Situation</dt><dd>{{ situationLabel(currentClient.situationFamiliale) }}</dd></div>
+            <div><dt>Nombre d’enfants</dt><dd>{{ currentClient.nombreEnfants }}</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <div class="management-actions" aria-label="Gestion de la fiche">
+        <button
+          class="button button--secondary"
+          data-action="edit-address"
+          type="button"
+          (click)="openAddressDialog()"
+        >
+          Modifier l’adresse
+        </button>
+        <button
+          class="button button--secondary"
+          data-action="edit-family"
+          type="button"
+          (click)="openFamilyDialog()"
+        >
+          Modifier la situation familiale
+        </button>
+        <button
+          class="button button--danger"
+          data-action="delete"
+          type="button"
+          (click)="openDeleteDialog()"
+        >
+          Supprimer la fiche
+        </button>
+      </div>
+    </section>
+
+    @if (addressDialogOpen()) {
+      <div class="dialog-backdrop">
+        <section
+          class="edit-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="address-dialog-title"
+        >
+          <div class="dialog-heading">
+            <div>
+              <p class="eyebrow">Fiche client</p>
+              <h2 id="address-dialog-title">Modifier l’adresse</h2>
+            </div>
+            <button
+              class="close-button"
+              data-action="cancel-address"
+              type="button"
+              aria-label="Annuler la modification d’adresse"
+              (click)="cancelAddressDialog()"
+            >
+              Fermer
+            </button>
+          </div>
+
+          <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" novalidate>
+            <div class="dialog-fields">
+              <div class="form-field">
+                <label for="ligne1">Adresse <span aria-hidden="true">*</span></label>
+                <input id="ligne1" autofocus formControlName="ligne1" autocomplete="address-line1" [attr.aria-invalid]="addressFieldError('ligne1') ? 'true' : null" [attr.aria-describedby]="addressFieldError('ligne1') ? 'ligne1-error' : null" />
+                @if (addressFieldError('ligne1'); as error) {
+                  <p class="field-error" id="ligne1-error">{{ error }}</p>
+                }
+              </div>
+              <div class="form-field">
+                <label for="ligne2">Complément d’adresse</label>
+                <input id="ligne2" formControlName="ligne2" autocomplete="address-line2" [attr.aria-invalid]="addressFieldError('ligne2') ? 'true' : null" [attr.aria-describedby]="addressFieldError('ligne2') ? 'ligne2-error' : null" />
+                @if (addressFieldError('ligne2'); as error) {
+                  <p class="field-error" id="ligne2-error">{{ error }}</p>
+                }
+              </div>
+              <div class="form-field">
+                <label for="codePostal">Code postal <span aria-hidden="true">*</span></label>
+                <input id="codePostal" formControlName="codePostal" autocomplete="postal-code" [attr.aria-invalid]="addressFieldError('codePostal') ? 'true' : null" [attr.aria-describedby]="addressFieldError('codePostal') ? 'codePostal-error' : null" />
+                @if (addressFieldError('codePostal'); as error) {
+                  <p class="field-error" id="codePostal-error">{{ error }}</p>
+                }
+              </div>
+              <div class="form-field">
+                <label for="ville">Ville <span aria-hidden="true">*</span></label>
+                <input id="ville" formControlName="ville" autocomplete="address-level2" [attr.aria-invalid]="addressFieldError('ville') ? 'true' : null" [attr.aria-describedby]="addressFieldError('ville') ? 'ville-error' : null" />
+                @if (addressFieldError('ville'); as error) {
+                  <p class="field-error" id="ville-error">{{ error }}</p>
+                }
+              </div>
+            </div>
+
+            @if (addressError()) {
+              <p class="save-error" role="alert">Impossible de modifier l’adresse. Vérifiez la cohérence du code postal et de la ville, puis réessayez.</p>
+            }
+
+            <div class="dialog-actions">
+              <button
+                class="button button--secondary"
+                data-action="cancel-address"
+                type="button"
+                (click)="cancelAddressDialog()"
+              >
+                Annuler
+              </button>
+              <button
+                class="button button--primary"
+                data-action="save-address"
+                type="submit"
+                [disabled]="isAddressSaving()"
+              >
+                {{ isAddressSaving() ? 'Enregistrement…' : 'Enregistrer' }}
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    }
+
+    @if (familyDialogOpen()) {
+      <div class="dialog-backdrop">
+        <section
+          class="edit-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="family-dialog-title"
+        >
+          <div class="dialog-heading">
+            <div>
+              <p class="eyebrow">Fiche client</p>
+              <h2 id="family-dialog-title">Modifier la situation familiale</h2>
+            </div>
+              <button
+              class="close-button"
+                autofocus
+              data-action="cancel-family"
+              type="button"
+              aria-label="Annuler la modification de situation familiale"
+              (click)="cancelFamilyDialog()"
+            >
+              Fermer
+            </button>
+          </div>
+
+          <form [formGroup]="familyForm" (ngSubmit)="saveFamily()" novalidate>
+            <div class="dialog-fields">
+              <div class="form-field">
+                <label for="situationFamiliale">Situation familiale</label>
+                <select id="situationFamiliale" autofocus formControlName="situationFamiliale">
+                  @for (situation of situations; track situation) {
+                    <option [value]="situation">{{ situationLabel(situation) }}</option>
+                  }
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="nombreEnfants">Nombre d’enfants</label>
+                <input
+                  id="nombreEnfants"
+                  type="number"
+                  min="0"
+                  max="20"
+                  step="1"
+                  formControlName="nombreEnfants"
+                  [attr.aria-invalid]="familyFieldError('nombreEnfants') ? 'true' : null"
+                  [attr.aria-describedby]="familyFieldError('nombreEnfants') ? 'nombreEnfants-error' : null"
+                />
+                @if (familyFieldError('nombreEnfants'); as error) {
+                  <p class="field-error" id="nombreEnfants-error">{{ error }}</p>
+                }
+              </div>
+            </div>
+
+            @if (familyError()) {
+              <p class="save-error" role="alert">Impossible de modifier la situation familiale. Réessayez.</p>
+            }
+
+            <div class="dialog-actions">
+              <button
+                class="button button--secondary"
+                data-action="cancel-family"
+                type="button"
+                (click)="cancelFamilyDialog()"
+              >
+                Annuler
+              </button>
+              <button
+                class="button button--primary"
+                data-action="save-family"
+                type="submit"
+                [disabled]="isFamilySaving()"
+              >
+                {{ isFamilySaving() ? 'Enregistrement…' : 'Enregistrer' }}
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    }
+
+    @if (deleteDialogOpen()) {
+      <div class="dialog-backdrop">
+        <section
+          class="edit-dialog delete-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-dialog-title"
+        >
+          <p class="eyebrow">Suppression de fiche</p>
+          <h2 id="delete-dialog-title">Supprimer {{ currentClient.prenom }} {{ currentClient.nom }} ?</h2>
+          <p>Cette action est irréversible. La fiche client sera définitivement retirée de la liste de cette session.</p>
+
+          @if (deleteError()) {
+            <p class="save-error" role="alert">Impossible de supprimer cette fiche. Elle est conservée; vous pouvez réessayer.</p>
+          }
+
+          <div class="dialog-actions">
+            <button
+              class="button button--secondary"
+              autofocus
+              data-action="cancel-delete"
+              type="button"
+              [disabled]="isDeleting()"
+              (click)="cancelDeleteDialog()"
+            >
+              Annuler
+            </button>
+            <button
+              class="button button--danger"
+              data-action="confirm-delete"
+              type="button"
+              [disabled]="isDeleting()"
+              (click)="confirmDelete()"
+            >
+              {{ isDeleting() ? 'Suppression…' : 'Confirmer la suppression' }}
+            </button>
+          </div>
+        </section>
+      </div>
+    }
+  }
+</main>

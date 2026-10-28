@@ -1,0 +1,84 @@
+<main class="create-page">
+  <header class="create-header">
+    <div>
+      <p class="eyebrow">Espace conseiller</p>
+      <h1>Nouveau client</h1>
+    </div>
+    <p class="required-note">Les champs marqués d’un astérisque sont obligatoires.</p>
+  </header>
+
+  <form class="client-form" [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <section class="form-section" aria-labelledby="identity-heading">
+      <h2 id="identity-heading">Identité</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="nom">Nom <span aria-hidden="true">*</span></label>
+          <input id="nom" formControlName="nom" autocomplete="family-name" [attr.aria-invalid]="fieldError('nom') ? 'true' : null" aria-describedby="nom-error" />
+          @if (fieldError('nom'); as error) { <p class="field-error" id="nom-error">{{ error }}</p> }
+        </div>
+        <div class="form-field">
+          <label for="prenom">Prénom <span aria-hidden="true">*</span></label>
+          <input id="prenom" formControlName="prenom" autocomplete="given-name" [attr.aria-invalid]="fieldError('prenom') ? 'true' : null" aria-describedby="prenom-error" />
+          @if (fieldError('prenom'); as error) { <p class="field-error" id="prenom-error">{{ error }}</p> }
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="address-heading">
+      <h2 id="address-heading">Adresse</h2>
+      <div class="form-grid">
+        <div class="form-field form-field--wide">
+          <label for="ligne1">Adresse <span aria-hidden="true">*</span></label>
+          <input id="ligne1" formControlName="ligne1" autocomplete="address-line1" [attr.aria-invalid]="fieldError('ligne1') ? 'true' : null" aria-describedby="ligne1-error" />
+          @if (fieldError('ligne1'); as error) { <p class="field-error" id="ligne1-error">{{ error }}</p> }
+        </div>
+        <div class="form-field form-field--wide">
+          <label for="ligne2">Complément d’adresse</label>
+          <input id="ligne2" formControlName="ligne2" autocomplete="address-line2" [attr.aria-invalid]="fieldError('ligne2') ? 'true' : null" aria-describedby="ligne2-error" />
+          @if (fieldError('ligne2'); as error) { <p class="field-error" id="ligne2-error">{{ error }}</p> }
+        </div>
+        <div class="form-field">
+          <label for="codePostal">Code postal <span aria-hidden="true">*</span></label>
+          <input id="codePostal" formControlName="codePostal" autocomplete="postal-code" inputmode="text" [attr.aria-invalid]="fieldError('codePostal') ? 'true' : null" aria-describedby="codePostal-error" />
+          @if (fieldError('codePostal'); as error) { <p class="field-error" id="codePostal-error">{{ error }}</p> }
+        </div>
+        <div class="form-field">
+          <label for="ville">Ville <span aria-hidden="true">*</span></label>
+          <input id="ville" formControlName="ville" autocomplete="address-level2" [attr.aria-invalid]="fieldError('ville') ? 'true' : null" aria-describedby="ville-error" />
+          @if (fieldError('ville'); as error) { <p class="field-error" id="ville-error">{{ error }}</p> }
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="family-heading">
+      <h2 id="family-heading">Situation familiale</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="situationFamiliale">Situation <span aria-hidden="true">*</span></label>
+          <select id="situationFamiliale" formControlName="situationFamiliale" [attr.aria-invalid]="fieldError('situationFamiliale') ? 'true' : null" aria-describedby="situationFamiliale-error">
+            @for (situation of situations; track situation) {
+              <option [value]="situation">{{ situation }}</option>
+            }
+          </select>
+          @if (fieldError('situationFamiliale'); as error) { <p class="field-error" id="situationFamiliale-error">{{ error }}</p> }
+        </div>
+        <div class="form-field">
+          <label for="nombreEnfants">Nombre d’enfants <span aria-hidden="true">*</span></label>
+          <input id="nombreEnfants" type="number" min="0" max="20" step="1" formControlName="nombreEnfants" [attr.aria-invalid]="fieldError('nombreEnfants') ? 'true' : null" aria-describedby="nombreEnfants-error" />
+          @if (fieldError('nombreEnfants'); as error) { <p class="field-error" id="nombreEnfants-error">{{ error }}</p> }
+        </div>
+      </div>
+    </section>
+
+    @if (saveError()) {
+      <p class="save-error" role="alert">Impossible de créer la fiche. Vérifiez vos données et réessayez.</p>
+    }
+
+    <footer class="form-actions">
+      <button class="button button--secondary" type="button" data-action="cancel" (click)="cancel()" [disabled]="isSubmitting()">Annuler</button>
+      <button class="button button--primary" type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Enregistrement…' : 'Enregistrer la fiche' }}
+      </button>
+    </footer>
+  </form>
+</main>

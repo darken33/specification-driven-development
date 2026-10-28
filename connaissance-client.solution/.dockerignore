@@ -1,0 +1,14 @@
+.git/
+**/target/*
+!connaissance-client-app/target/connaissance-client-app-2.2.0-SNAPSHOT.jar
+node_modules/
+coverage/
+**/__pycache__/
+**/*.py[cod]
+**/*.egg-info/
+*.log*
+.env*
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

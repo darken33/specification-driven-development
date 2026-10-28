@@ -1,167 +1,97 @@
-# Connaissance Client Constitution
-
-<!-- Sync Impact Report
-VERSION: 1.0.0 (Initial adoption)
-RATIFICATION_DATE: 2026-06-11
-AMENDMENTS: N/A (first version)
-NEW_PRINCIPLES: I-VII (all initial)
-TEMPLATES_UPDATED: Pending (see Follow-up section)
+<!--
+Sync Impact Report
+Version: constitution absente (squelette uniquement) -> 1.0.0
+Principes ajoutés: I. Architecture centrée sur le domaine; II. Contrats d'API et
+	d'événements comme sources de vérité; III. Invariants métier et protection des données;
+	IV. Tests des comportements et frontières; V. Résilience et observabilité des intégrations
+Sections ajoutées: Contraintes techniques et de sécurité; Workflow de développement
+Sections supprimées: Aucune; les emplacements et commentaires d'exemple du scaffold sont remplacés
+TODO: confirmer la date de ratification après validation humaine
 -->
+# Connaissance Client Constitution
 
 ## Core Principles
 
-### I. Hexagonal Architecture (Ports & Adapters)
-The system MUST strictly follow hexagonal/onion architecture with clear separation of concerns:
-- **Domain Layer**: Pure business logic, zero framework dependencies, contains aggregates, value objects, domain services, and interfaces (ports)
-- **Adapter Layer**: Concrete implementations for persistence, external services, and event publishing
-- **API Layer**: REST contracts and HTTP concerns, generated from OpenAPI specifications
-- **Application Layer**: Spring Boot assembly, configuration, and dependency injection
+### I. Architecture centrée sur le domaine
+Les règles métier et les modèles du domaine MUST rester dans `connaissance-client-domain`.
+Les ports y expriment les besoins du domaine; les adaptateurs implémentent ces ports pour
+MongoDB, les services HTTP et la messagerie. `connaissance-client-app` assemble ces modules.
+Le domaine MUST NOT dépendre directement d'un adaptateur concret. Toute dépendance de
+framework ajoutée au domaine MUST être justifiée par un besoin métier ou technique explicite.
+Cette direction de dépendance préserve la testabilité et permet de remplacer les systèmes
+externes sans déplacer les règles métier.
 
-**Rationale**: Enables independent testability, framework agnosticism, and clear business-domain isolation. Makes domain logic reusable and evolves independent of technology choices.
+### II. Contrats d'API et d'événements comme sources de vérité
+Les contrats OpenAPI et AsyncAPI MUST être la source de vérité des interfaces REST et des
+événements. Le code généré MUST NOT être modifié à la main; les changements se font dans le
+contrat et par régénération. Tout changement de contrat MUST préciser son impact de
+compatibilité et être couvert par des tests adaptés. Les consommateurs et producteurs
+concernés MUST être pris en compte avant une évolution incompatible.
 
-### II. Domain-Driven Design (DDD) is Non-Negotiable
-- Entity aggregates MUST be identifiable by UUID and enforce invariants
-- Value Objects MUST be immutable, strongly typed (e.g., `Nom`, `Prenom`, `CodePostal`, not raw Strings)
-- Domain Services MUST encapsulate business use cases (e.g., `ConnaissanceClientService`)
-- Domain Exceptions MUST be semantically named (e.g., `ClientInconnuException`, `AdresseInvalideException`)
-- Repository interfaces MUST live in domain; implementations in adapters
-- Port interfaces (e.g., `ClientRepository`, `CodePostauxService`) MUST reside in domain layer
+### III. Invariants métier et protection des données
+Les entrées MUST être validées à la frontière de l'API et les invariants MUST être garantis
+par le domaine, indépendamment du transport. Les données personnelles MUST être traitées
+selon le moindre privilège: les accès, l'authentification et l'autorisation doivent être
+explicites dans chaque environnement; les secrets MUST être fournis par configuration
+sécurisée et non conservés dans le dépôt. Les journaux MUST exclure les données personnelles
+et les secrets. Toute exposition d'endpoint de gestion ou configuration CORS permissive MUST
+faire l'objet d'une justification et d'une revue de sécurité.
 
-**Rationale**: DDD keeps the codebase maintainable, explicit, and aligned with business semantics. Strong typing reduces runtime errors and improves IDE support.
+### IV. Tests des comportements et frontières
+Les règles métier MUST être couvertes par des tests unitaires. Les conversions, contrats
+externes et comportements d'intégration MUST être vérifiés au niveau de la frontière
+concernée, avec des tests d'intégration lorsque le comportement réel du framework ou d'un
+système externe est déterminant. Les tests MUST vérifier les résultats et les cas d'échec
+pertinents. Avant livraison, `./mvnw verify` MUST réussir; les tests d'intégration suivent
+la convention `*IT.java` et sont exécutés par Maven Failsafe.
 
-### III. API-First with OpenAPI 3.0+
-- OpenAPI specification (YAML) is the single source of truth for REST contracts
-- Code MUST be generated from OpenAPI via `openapi-generator-maven-plugin`; never manually edit generated stubs
-- OpenAPI spec MUST document all use cases, validation rules, business constraints, and response codes
-- Specifications MUST include detailed descriptions, examples, and error scenarios
-- Version changes in OpenAPI MUST follow semantic versioning (MAJOR.MINOR.PATCH)
+### V. Résilience et observabilité des intégrations
+Chaque intégration réseau ou asynchrone MUST définir et tester son comportement en cas de
+délai dépassé, d'indisponibilité ou de réponse invalide. Les délais, reprises, coupe-circuits
+et replis MUST être adaptés au contrat métier; un repli ne doit pas transformer un échec en
+succès silencieux. Les changements de publication d'événements MUST tenir compte de leur
+contrat et du comportement en cas d'échec. Les opérations MUST être diagnostiquables par des
+journaux exploitables et corrélables; les métriques et endpoints de santé exposés MUST être
+configurés et protégés selon l'environnement.
 
-**Rationale**: API-first ensures consistency between specification and implementation, reduces drift, enables contract testing, and improves developer experience and documentation automation.
+## Contraintes techniques et de sécurité
 
-### IV. Test-First with Mandatory Coverage
-- Tests MUST be written before or alongside implementation (TDD preferred)
-- Unit tests in domain layer MUST test aggregates, value objects, and domain logic in isolation
-- Integration tests (naming: `*IT.java`) MUST validate adapter contracts and cross-layer interactions
-- Test coverage (JaCoCo) target: **≥80%** excluding generated code and infrastructure
-- Test execution MUST use Maven Failsafe for integration tests; unit tests via standard `mvn test`
+Le projet cible Java 21 et Spring Boot 4 dans un monorepo Maven multi-module. Le wrapper
+`./mvnw` MUST être utilisé pour les builds reproductibles. Les versions et plugins communs
+MUST être gérés dans le POM parent; toute nouvelle dépendance doit être nécessaire, maintenue
+et compatible avec la stack. Les modules existants séparent domaine, adaptateurs de
+persistance, d'intégration externe et d'événements, contrat API et application: toute
+évolution MUST respecter cette séparation ou justifier explicitement une modification
+d'architecture.
 
-**Rationale**: Early test design catches requirements misunderstandings, prevents regressions, and documents expected behavior.
+Les configurations propres à un environnement MUST rester externalisables. Les
+configurations de production MUST appliquer l'authentification et l'autorisation attendues,
+limiter les origines CORS et protéger les endpoints de gestion. Les changements touchant aux
+données personnelles, aux contrôles d'accès, aux dépendances ou aux contrats MUST inclure une
+revue de leurs risques de sécurité et de confidentialité.
 
-### V. Spring Boot & Cloud-Native Standards
-- Target Java version: **Java 21** (LTS), enforce via `pom.xml` properties and IDE configuration
-- Spring Boot version: **4.0+** (latest stable) with Spring Cloud **2025.1.0+**
-- Security MUST use Spring Security + OAuth2 Resource Server; JWT validation mandatory
-- Observability MUST include Actuator health endpoints + Prometheus metrics (micrometer)
-- Dependency versioning MUST be centralized in parent POM and managed transitively
-- Spring Boot Maven Plugin MUST be configured for repackaging into executable JAR
+## Workflow de développement
 
-**Rationale**: Ensures compatibility with modern cloud platforms, standard logging/monitoring, and secure by default.
-
-### VI. Dependency Quality & Supply Chain Security
-- All external dependencies MUST be scanned via OWASP Dependency-Check before deployment
-- Dependency vulnerabilities MUST be addressed within SLA (Critical: 7 days, High: 30 days)
-- Direct dependencies MUST be explicitly declared; no implicit transitive dependencies
-- Lombok and MapStruct (code generation) MUST be declared in `<annotationProcessorPaths>` only
-- Java nullability annotations (JSpecify) MUST be applied to public APIs
-
-**Rationale**: Prevents supply chain attacks, reduces security incidents, and ensures explicit, maintainable dependency graphs.
-
-### VII. Observable, Containerizable, Production-Ready
-- Logging MUST use SLF4J + Logback with structured output (JSON in production)
-- Metrics MUST be published to Prometheus via micrometer registry
-- Health checks MUST respond on `/actuator/health` with detailed component status
-- Application MUST run as stateless container (Docker) with JDK 21 base image
-- Configuration MUST be externalized via Spring Boot `application.yml` (12-factor app)
-- All modules MUST include unit AND integration tests; no module without tests
-
-**Rationale**: Enables observability, predictable deployments, horizontal scaling, and reduced MTTR.
-
-## Architecture Constraints
-
-### Technology Stack (Non-Negotiable)
-- **Language**: Java 21 (LTS)
-- **Framework**: Spring Boot 4.0+ with Spring Cloud 2025.1.0+
-- **Build Tool**: Maven 3.8+ (enforce via wrapper `./mvnw`)
-- **Persistence**: MongoDB (primary), no polyglot persistence without governance review
-- **Messaging**: Kafka for async events (via Spring Cloud Stream or direct client)
-- **API Generation**: OpenAPI 3.0.1 + openapi-generator-maven-plugin
-- **Mapping**: MapStruct (type-safe DTO transformation)
-- **Immutability**: Lombok with `@FieldDefaults`, `@AllArgsConstructor`, `@EqualsAndHashCode`
-- **Nullability**: JSpecify annotations on all public APIs
-- **Container**: Docker + JDK 21 base image
-
-### Performance & Reliability
-- **Availability Target**: 99.9% uptime (production)
-- **Response Time Target**: P95 < 500ms for client queries (excluding network)
-- **Throughput Target**: ≥ 100 requests/sec per instance
-- **Memory Limit**: Container heap ≤ 512MB for standard workload
-- **Resilience**: Circuit breakers (Resilience4j) on external service calls (postal code service)
-- **Retry Policy**: Exponential backoff with jitter for transient failures
-
-### Security
-- JWT Bearer token validation REQUIRED on all endpoints (except health)
-- OAuth2 Resource Server MUST validate token issuer and scopes
-- Sensitive data (personal info) MUST NOT appear in logs; sanitize before logging
-- Database connections MUST use SSL/TLS (MongoDB connection string validation)
-- OWASP Top 10 violations MUST be addressed; dependency scanning non-negotiable
-
-## Development Workflow
-
-### Source Control & Branching
-- **Repository**: Multi-module Maven monorepo (root `pom.xml` + module-specific `pom.xml`)
-- **Branching**: Conventional (feature/*, bugfix/*, hotfix/*)
-- **Commits**: Semantic commit messages (`feat:`, `fix:`, `test:`, `docs:`, `chore:`)
-- **PR Requirements**: 
-  - All tests passing (unit + integration)
-  - Code coverage maintained or improved
-  - OWASP scan clean
-  - Peer review (≥1 approval)
-
-### Build & Test Execution
-- **Local Build**: `./mvnw clean install -DskipTests=false`
-- **Local Run**: `./mvnw -pl connaissance-client-app -am spring-boot:run`
-- **Generate OpenAPI Code**: `./mvnw -pl connaissance-client-api -am generate-sources`
-- **Integration Tests**: `./mvnw verify` (includes Failsafe tests)
-- **Docker Build**: `docker build -t connaissance-client:local . && docker run -p 8080:8080 connaissance-client:local`
-- **Coverage Report**: Targets ≥80%; generated in `target/site/jacoco/index.html`
-
-### Module Structure (Convention)
-```
-connaissance-client/
-├── connaissance-client-domain        [DDD models, aggregates, ports, services]
-├── connaissance-client-db-adapter    [MongoDB repository impl]
-├── connaissance-client-cp-adapter    [External services: postal codes]
-├── connaissance-client-event-adapter [Kafka event publishing]
-├── connaissance-client-api           [OpenAPI spec + generated controllers/DTOs]
-└── connaissance-client-app           [Spring Boot assembly + configuration]
-```
-Each adapter MUST have its own `src/test` folder with integration tests.
+Chaque changement MUST préciser le comportement attendu et les critères d'acceptation. Les
+modifications de contrat commencent par la mise à jour du fichier OpenAPI ou AsyncAPI source;
+les modifications de code généré se font uniquement via les générateurs Maven configurés.
+Les tests pertinents MUST être ajoutés ou adaptés dans le module propriétaire du comportement.
+La revue de code MUST vérifier les principes de cette constitution, la compatibilité des
+contrats, les tests et les configurations de sécurité applicables. Une livraison n'est prête
+que si le build et les tests obligatoires passent et si les écarts connus sont documentés.
 
 ## Governance
 
-### Versioning Policy
-- **Format**: MAJOR.MINOR.PATCH (SemVer 2.0.0)
-- **MAJOR**: Breaking API changes, domain model restructuring, persistence layer migration
-- **MINOR**: New domain use cases, new adapter implementations, new Kafka events
-- **PATCH**: Bug fixes, documentation updates, dependency upgrades (non-breaking)
-- **Pre-release**: `-SNAPSHOT` during active development; release via Maven release plugin
+Cette constitution guide les décisions d'architecture et de développement du projet. Toute
+dérogation MUST être motivée dans le changement concerné et approuvée lors de sa revue. Toute
+modification de la constitution MUST être proposée et validée par le mainteneur du projet
+avant adoption; les changements impliquant une migration MUST documenter celle-ci.
 
-### Constitution Amendment Process
-1. Identify gap or violation (issue in repo or code review finding)
-2. Draft amendment addressing root cause with rationale
-3. Peer review by architecture team (≥2 approvals)
-4. Update constitution in `constitution.md` with new version and `LAST_AMENDED_DATE`
-5. Update all dependent templates (spec-template, plan-template, tasks-template)
-6. Commit with message: `docs: amend constitution to vX.Y.Z (principle: description)`
+La version suit SemVer: MAJOR pour une modification incompatible des principes, MINOR pour
+l'ajout ou l'évolution substantielle d'un principe, PATCH pour une clarification sans
+changement de gouvernance. Les revues de changements et de conception MUST vérifier la
+conformité aux principes et faire remonter les violations ou dérogations. Cette constitution
+est la référence gouvernante; les guides opérationnels peuvent préciser son application mais
+ne peuvent pas la contredire.
 
-### Compliance Review Cadence
-- **PR-level**: Every PR MUST verify hexagonal structure, DDD principles, test coverage, security scan
-- **Sprint-level**: Weekly code review checklist against constitution (alignment verification)
-- **Release-level**: Pre-release checklist: coverage ≥80%, zero high-severity vulnerabilities, all integration tests green
-
-### Dispute Resolution
-- Complexity exceptions require architecture team consensus + constitution update
-- Deviations from core principles (I, II, III, IV, VII) are NON-NEGOTIABLE without governance amendment
-- Principle VI (dependency security) is NON-NEGOTIABLE per legal/compliance requirements
-
-**Version**: 1.0.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-06-11
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): date à confirmer lors de la validation | **Last Amended**: 2026-10-28

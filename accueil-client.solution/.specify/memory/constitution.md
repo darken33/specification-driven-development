@@ -1,119 +1,109 @@
-# Sync Impact Report
 <!--
-Version change: UNKNOWN -> 0.1.0
-Modified principles:
-- [PRINCIPLE_1_NAME] -> Modern Stack (Angular & TypeScript)
-- [PRINCIPLE_2_NAME] -> KISS (Keep It Simple, Stupid)
-- [PRINCIPLE_3_NAME] -> Séparation UI / Traitement
-Added sections:
-- Architecture Overview
-- Project Structure
-- Development Workflow
+Sync Impact Report
+Version change: unversioned -> 1.0.0 (initial constitution)
+Modified principles: none; five principles established for the first time
+Added sections: Architecture et périmètre; Workflow de développement et qualité
 Removed sections: none
-Templates requiring updates:
-- .specify/templates/plan-template.md: ✅ updated
-- .specify/templates/spec-template.md: ✅ updated
-- .specify/templates/tasks-template.md: ✅ updated
-Follow-up TODOs:
-- RATIFICATION_DATE: TODO(RATIFICATION_DATE): date d'adoption initiale inconnue
+Follow-up TODO: confirm the original ratification date
 -->
-
-# Accueil Client Frontend Constitution
+# Constitution de l'application front-end Angular
 
 ## Core Principles
 
-### Modern Stack (Angular & TypeScript)
-Tous les nouveaux travaux POC doivent utiliser les versions stables les plus récentes d'Angular et de TypeScript disponibles au moment de l'initialisation du projet. Le projet MUST déclarer explicitement les versions dans `package.json` et `tsconfig.json`, et SHOULD documenter la date de vérification des versions dans le plan de mise en route.
+### I. Simplicité (KISS)
+Les solutions MUST rester proportionnées au besoin du POC. Les abstractions,
+dépendances et couches MUST être ajoutées uniquement lorsqu'elles réduisent une
+complexité réelle ou répondent à un besoin établi. Toute complexité non évidente
+MUST être justifiée dans la conception ou la revue concernée.
 
-Rationale: profiter des dernières améliorations de productivité, sécurité et typage tout en restant explicite sur la version utilisée.
+### II. Angular et TypeScript à jour
+Le projet MUST utiliser les dernières versions stables d'Angular et de TypeScript
+compatibles entre elles au moment de la mise à jour. Les versions MUST respecter
+la matrice de compatibilité officielle d'Angular. Les mises à niveau MUST être
+réalisées avec `ng update` et vérifiées par les commandes du projet ; les versions
+préliminaires MUST NOT être adoptées sans besoin explicite.
 
-### KISS (Keep It Simple, Stupid)
-Privilégier la simplicité : les solutions MUST rester simples, lisibles et faciles à modifier. Les implémentations MUST éviter l'optimisation prématurée, les abstractions génériques inutiles et la sur-ingénierie. Chaque ajout de complexité MUST être justifié dans un court commentaire de conception.
+### III. Outillage Angular et npm en priorité
+La génération et les opérations courantes MUST privilégier Angular CLI (`ng`)
+et npm : `ng generate` pour les éléments Angular pris en charge, et npm pour
+les dépendances et scripts du projet. Les modifications manuelles restent
+permises lorsqu'elles sont plus simples ou que la génération ne convient pas.
+Les dépendances MUST rester limitées au besoin et le fichier de verrouillage npm
+MUST être maintenu pour rendre les installations reproductibles.
 
-Rationale: POC = valider des idées rapidement; la simplicité accélère l'itération et la compréhension.
+### IV. Séparation de l'interface et du traitement
+Les composants d'interface MUST principalement afficher l'état et transmettre
+les intentions de l'utilisateur. Les règles métier, transformations et accès
+aux données MUST résider dans des services ou fonctions dédiés, testables sans
+interaction directe avec l'interface. Les composants MUST NOT devenir le lieu
+de règles métier ou d'appels réseau complexes.
 
-### Séparation UI / Traitement (Séparation des responsabilités)
-L'interface utilisateur (composants Angular, templates, styles) MUST être strictement séparée de la logique métier et des appels réseau (services, use-cases, domain). Les composants MUST rester « dumb/presentational » autant que possible : ils reçoivent des données via `@Input()` et émettent des événements via `@Output()`; la logique MUST résider dans des services ou des classes de domaine testables.
+### V. Architecture orientée fonctionnalités
+Le code applicatif MUST être organisé par fonctionnalités afin de garder
+ensemble les éléments qui évoluent ensemble. Les composants, directives et
+services réutilisables sans logique métier MUST être placés dans un espace
+partagé. Les éléments d'infrastructure réellement transverses MUST être
+distincts des fonctionnalités. Une fonctionnalité MUST pouvoir être comprise
+et modifiée sans dépendances circulaires avec les autres fonctionnalités.
 
-Rationale: facilite le test unitaire, le remplacement des vues et la réutilisabilité du code métier.
+## Architecture et périmètre
 
-### Testabilité et Retour Rapide
-Les unités critiques MUST être couvertes par des tests unitaires simples (Jasmine/Karma ou Jest). Les tests d'intégration pour les services POC sont recommandés lorsque utiles. Les tests MUST être rapides et focalisés sur la valeur démontrée par le POC.
+L'application MUST privilégier les composants Angular autonomes (standalone)
+et le routage Angular. Les routes de fonctionnalités MUST être chargées à la
+demande lorsque cela reste simple et pertinent.
 
-Rationale: même pour un POC, prouver que le comportement attendu est vérifiable réduit le risque d'interprétation erronée.
+La structure de référence sous `src/app` est organisée autour de :
 
-### Minimalisme Pragmatique
-Favoriser des dépendances minimales et des API claires. Les modules et bibliothèques externes MUST être ajoutés uniquement s'ils réduisent significativement le coût d'implémentation et ne complexifient pas l'architecture.
+- `features/<fonctionnalite>/` pour les pages, composants et traitements propres
+	à une fonctionnalité ;
+- `shared/` pour les éléments d'interface et utilitaires génériques, sans règles
+	métier propres à une fonctionnalité ;
+- `core/` pour les services et configurations réellement transverses à
+	l'application.
 
-Rationale: réduit la maintenance et les risques liés aux versions lors d'expérimentations rapides.
+Cette structure est un guide : MUST NOT créer un dossier ou une couche vide
+uniquement pour respecter une convention. Les composants MUST utiliser les
+signaux Angular pour l'état local synchrone lorsqu'ils simplifient le code, et
+RxJS pour les flux asynchrones lorsque ses opérateurs apportent une valeur
+claire. Un mécanisme global de gestion d'état MUST NOT être ajouté sans besoin
+avéré.
 
-## Architecture Overview
+Ce projet est un POC et n'a pas pour objectif une mise en production. La
+conception et les tâches de ce périmètre MUST NOT inclure l'authentification,
+les mesures de sécurité de production ni les pipelines CI/CD. Toute évolution
+future vers la production devra réévaluer explicitement ces exclusions.
 
-Objectif: Définir une architecture front-end simple, modulaire et conforme aux principes ci-dessus pour un POC Angular.
+## Workflow de développement et qualité
 
-- Pattern recommandé: Component-Driven + Feature Modules
-- Présentation: `components/` (dumb components), `containers/` (smart components si nécessaire), `services/` (API & business logic), `models/` (types et interfaces), `state/` (si un store est utilisé, préférer une solution minimale)
-- Communication: Services injectable pour accès aux API; Observables (`RxJS`) pour flux asynchrones; évitez les singletons globaux non testés.
+Les changements MUST suivre le flux le plus direct : générer ou modifier le code
+avec les outils du projet, puis vérifier le résultat avec les commandes Angular
+et npm disponibles. Avant de considérer une modification terminée, les
+vérifications pertinentes MUST inclure au minimum la compilation (`ng build`)
+et, lorsque le changement comporte un comportement testable, les tests ciblés
+(`ng test`). Les tests MUST se concentrer sur les règles métier et les
+comportements d'interface modifiés ; leur niveau MUST rester proportionné au
+risque et au périmètre du POC.
 
-Dependencies minimales:
-- Angular CLI (dernier stable)
-- TypeScript (dernier stable)
-- RxJS (aligné avec Angular)
-- Outils de qualité: ESLint, Prettier, Husky (optionnel pour commits local)
-
-Notes POC: configuration et scripts de build peuvent rester basiques; pas d'effort de production (optimisation, sécurité) requis au-delà de la démonstration fonctionnelle.
-
-## Project Structure
-
-Structure recommandée (POC simple):
-
-```
-frontend/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   ├── containers/
-│   │   ├── features/
-│   │   ├── services/
-│   │   ├── models/
-│   │   └── app.module.ts
-│   ├── assets/
-│   └── main.ts
-├── angular.json
-├── package.json
-└── tsconfig.json
-```
-
-Conventions clés:
-- `components/`: petits composants présentational, tests unitaires rapides
-- `features/`: modules par fonctionnalité pour isolation
-- `services/`: logique métier & intégration API
-- Types et interfaces centralisées dans `models/`
-
-Exclusions explicites (POC):
-- Authentification et sécurité: NON gérées ici
-- Pipelines CI/CD: NON définis pour ce POC
-
-## Development Workflow
-
-- Initialisation: `ng new` ou démarrage minimal via `angular.json`/`package.json` en spécifiant versions
-- Lint & format: configurer ESLint + Prettier localement
-- Tests: `ng test` ou `jest` pour tests unitaires rapides
-- Démarrage local: `npm install` puis `npm start` (ou `ng serve`)
-
-Contributions POC:
-- Petites branches thématiques, commits atomiques
-- Code review légère: vérifier conformité aux principes KISS et séparation UI/traitement
-
-## Quality Gates (POC)
-
-- La porte d'entrée pour la validation d'une itération POC est la démonstration fonctionnelle et des tests unitaires couvrant les règles métier critiques.
-- Complexité additionnelle MUST être justifiée par un court paragraphe dans la PR/description.
+Les types TypeScript MUST être explicites lorsque l'inférence ne suffit pas à
+clarifier le contrat. Les erreurs de compilation et les diagnostics introduits
+par une modification MUST être corrigés avant validation. Les scripts npm
+existants et les conventions Angular du dépôt MUST être réutilisés plutôt que
+remplacés par des commandes ou outils redondants.
 
 ## Governance
 
-1. Portée: Cette constitution définit les règles minimales à suivre pour les itérations front-end de type POC dans ce dépôt. Elle prime sur les pratiques locales non documentées.
-2. Amendements: Toute modification de cette constitution MUST être documentée dans une PR décrivant le changement, la raison et l'impact. Les amendements mineurs (typos, clarifications) incrémentent le patch; ajouts de principes incrémentent le minor; changements incompatibles incrémentent le major.
-3. Conformité: Les PRs doivent référencer cette constitution et expliquer, si nécessaire, pourquoi une règle a été contournée.
+Cette constitution prévaut en cas de conflit avec les choix d'implémentation
+ou les documents de conception du projet. Toute dérogation MUST être motivée et
+consignée dans le document de conception ou la revue du changement concerné.
+Chaque changement de périmètre MUST être examiné au regard des principes,
+notamment de la simplicité, de la séparation interface-traitement et des
+exclusions du POC.
 
-**Version**: 0.1.0 | **Ratified**: TODO(RATIFICATION_DATE): date d'adoption initiale inconnue | **Last Amended**: 2026-06-02
+Toute modification de cette constitution MUST être relue et accompagnée d'une
+mise à jour de sa version et de sa date d'amendement. La version suit SemVer :
+MAJOR pour une modification incompatible des règles, MINOR pour l'ajout ou
+l'élargissement substantiel d'un principe, PATCH pour une clarification sans
+changement de portée. Les revues de conception et de code MUST vérifier les
+principes applicables ; les écarts acceptés MUST être explicitement justifiés.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): date d'adoption initiale à confirmer | **Last Amended**: 2026-10-28
